@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/item"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:selectableItemBackground"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/appIcon"
+            android:src="@mipmap/ic_launcher"
+            android:contentDescription="Icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:transitionName="icon" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/app_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="2.5"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorText"
+                    android:text="name" />
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorTextMuted"
+                    android:text="time"/>
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorTextMuted"
+                    android:text="date"/>
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/app_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:typeface="monospace"
+                android:textSize="14sp"
+                android:textColor="@color/colorTextMuted"
+                android:text="title" />
+
+            <TextView
+                android:id="@+id/app_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:maxLines="3"
+                android:textColor="@color/colorTextMuted"
+                android:text="text" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

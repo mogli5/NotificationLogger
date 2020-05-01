@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Delete this notification"
+        android:id="@+id/delete_current"
+        app:showAsAction="never"
+        android:orderInCategory="100"/>
+
+    <item android:title="Set an reminder"
+        android:id="@+id/set_an_reminder"
+        android:orderInCategory="99"
+        app:showAsAction="never"/>
+
+</menu>

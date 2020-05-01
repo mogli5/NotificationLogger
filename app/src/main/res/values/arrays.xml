@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+    <array name="pref_time_labels">
+        <item>@string/pref_one_hour</item>
+        <item>@string/pref_two_hour</item>
+        <item>@string/pref_four_hours</item>
+        <item>@string/pref_eight_hours</item>
+        <item>@string/pref_sixteen_hours</item>
+        <item>@string/pref_one_day</item>
+        <item>@string/pref_two_days</item>
+        <item>@string/pref_four_days</item>
+        <item>@string/pref_one_week</item>
+        <item>@string/pref_two_weeks</item>
+        <item>@string/pref_one_month</item>
+    </array>
+
+    <array name="pref_time_values">
+        <item>@string/pref_value_one_hour</item>
+        <item>@string/pref_value_two_hour</item>
+        <item>@string/pref_value_four_hours</item>
+        <item>@string/pref_value_eight_hours</item>
+        <item>@string/pref_value_sixteen_hours</item>
+        <item>@string/pref_value_one_day</item>
+        <item>@string/pref_value_two_days</item>
+        <item>@string/pref_value_four_days</item>
+        <item>@string/pref_value_one_week</item>
+        <item>@string/pref_value_two_weeks</item>
+        <item>@string/pref_value_one_month</item>
+    </array>
+
+</resources>

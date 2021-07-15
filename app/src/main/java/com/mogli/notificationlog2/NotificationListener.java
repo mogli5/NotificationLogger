@@ -39,7 +39,7 @@ public class NotificationListener extends NotificationListenerService {
     }
 
     @Override
-    public void onListenerDisconnected (){
-        Log.v(TAG,"Disconnected");
+    public void onListenerDisconnected() {
+        Log.v(TAG, "Disconnected");
     }
 }

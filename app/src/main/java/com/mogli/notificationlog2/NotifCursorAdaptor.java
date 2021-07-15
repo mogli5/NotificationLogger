@@ -1,12 +1,9 @@
 package com.mogli.notificationlog2;
 
 import android.content.Context;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +31,12 @@ public class NotifCursorAdaptor extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView AppName = (TextView) view.findViewById(R.id.app_name);
-        TextView time = (TextView) view.findViewById(R.id.time);
-        TextView date = (TextView) view.findViewById(R.id.date);
-        TextView AppTitle = (TextView) view.findViewById(R.id.app_title);
-        TextView AppText = (TextView) view.findViewById(R.id.app_text);
-        ImageView imageView = (ImageView) view.findViewById(R.id.appIcon);
+        TextView AppName = view.findViewById(R.id.app_name);
+        TextView time = view.findViewById(R.id.time);
+        TextView date = view.findViewById(R.id.date);
+        TextView AppTitle = view.findViewById(R.id.app_title);
+        TextView AppText = view.findViewById(R.id.app_text);
+        ImageView imageView = view.findViewById(R.id.appIcon);
 
         int appNameColumnIndex = cursor.getColumnIndex(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_NAME);
         int appTimeColumnIndex = cursor.getColumnIndex(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TIME);

@@ -12,7 +12,8 @@ public final class NotificationsContract {
 
     public static final String PATH_NOTIFS = "notifications";
 
-    private NotificationsContract(){}
+    private NotificationsContract() {
+    }
 
     public static final class NotifEntry implements BaseColumns {
 
@@ -33,7 +34,7 @@ public final class NotificationsContract {
 
         public final static String _ID = BaseColumns._ID;
 
-        public final static String COLUMN_NOTIF_APP_NAME ="name";
+        public final static String COLUMN_NOTIF_APP_NAME = "name";
 
         public final static String COLUMN_NOTIF_APP_DATA_TEXT = "text";
 

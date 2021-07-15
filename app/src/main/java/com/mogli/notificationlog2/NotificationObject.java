@@ -4,22 +4,20 @@ import android.app.Notification;
 import android.content.Context;
 import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
-import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 class NotificationObject {
+    private final Context context;
+    private final Notification notification;
 
-    private Context context;
-    private Notification notification;
+    private final String packageName;
+    private final long postTime;
+    private final long systemTime;
+    private final boolean isOngoing;
 
-    private String packageName;
-    private long postTime;
-    private long systemTime;
-    private boolean isOngoing;
-
-    private long when;
-    private String appName;
+    private final long when;
+    private final String appName;
     private String title;
     private String text;
     private String extraText;
@@ -27,7 +25,6 @@ class NotificationObject {
 
 
     public NotificationObject(StatusBarNotification sbn, Context context) {
-
         this.context = context;
         notification = sbn.getNotification();
         packageName = sbn.getPackageName();
@@ -35,7 +32,6 @@ class NotificationObject {
         systemTime = System.currentTimeMillis();
         isOngoing = sbn.isOngoing();
         when = notification.when;
-
 
         Bundle extras = NotificationCompat.getExtras(notification);
         appName = utils.getAppNameFromPackage(context, packageName, false);
@@ -54,16 +50,12 @@ class NotificationObject {
             if (extraText.length() != 0)
                 text += "\n" + extraText;
 
-            if(textBig.length() != 0){
+            if (textBig.length() != 0) {
 //                Log.v("NotifObject","index: " +index + "   Modified extra text :" + textBig.substring(textlen + 1));
                 text += textBig.substring(textlen);
             }
-
-
         }
-
     }
-
 
     public long getSystemTime() {
         return systemTime;
@@ -85,7 +77,7 @@ class NotificationObject {
         return packageName;
     }
 
-    public boolean getisOngoing(){
+    public boolean getIsOngoing() {
         return isOngoing;
     }
 }

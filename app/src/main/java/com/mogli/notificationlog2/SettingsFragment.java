@@ -1,9 +1,7 @@
 package com.mogli.notificationlog2;
 
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -17,7 +15,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         try {
             addPreferencesFromResource(R.xml.root_preferences);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -57,9 +55,9 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 //        Log.v("6","here");
         Preference preference = findPreference(key);
-        if(preference != null){
+        if (preference != null) {
 //            Log.v("7","here");
-            if(preference instanceof ListPreference){
+            if (preference instanceof ListPreference) {
 //                Log.v("8","here");
                 String value = sharedPreferences.getString(preference.getKey(), "");
                 setPreferenceSummary(preference, value);

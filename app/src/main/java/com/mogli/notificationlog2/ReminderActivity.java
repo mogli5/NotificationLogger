@@ -1,8 +1,6 @@
 package com.mogli.notificationlog2;
 
-import android.app.AlertDialog;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
 import java.util.TimeZone;
 
 public class ReminderActivity extends AppCompatActivity {
@@ -46,10 +43,10 @@ public class ReminderActivity extends AppCompatActivity {
 
 //        Log.v("remainderAct", "uri : " + notifUri);
 
-        btn = (Button) findViewById(R.id.date_time_set);
-        title = (TextView) findViewById(R.id.textViewReminder);
-        final DatePicker datePicker = (DatePicker) findViewById(R.id.date_picker);
-        final TimePicker timePicker = (TimePicker) findViewById(R.id.time_picker);
+        btn = findViewById(R.id.date_time_set);
+        title = findViewById(R.id.textViewReminder);
+        final DatePicker datePicker = findViewById(R.id.date_picker);
+        final TimePicker timePicker = findViewById(R.id.time_picker);
 //        String[] projection = new String[]{NotificationsContract.NotifEntry._ID, NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_NAME, NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TEXT};
 //        String selection = " " + NotificationsContract.NotifEntry._ID + " == ?" ;
 //        String[]selectionArgs = new String[]{notifUri.getLastPathSegment()};
@@ -65,7 +62,7 @@ public class ReminderActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(count == 0){
+                if (count == 0) {
                     year = datePicker.getYear();
                     month = datePicker.getMonth();
                     dayOfMonth = datePicker.getDayOfMonth();
@@ -74,12 +71,11 @@ public class ReminderActivity extends AppCompatActivity {
                     count++;
                     btn.setText("Set Reminder");
                     title.setText("Set time");
-                }else if(count == 1){
+                } else if (count == 1) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         currentHour = timePicker.getHour();
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),"Android version not Supported",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Android version not Supported", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -108,12 +104,12 @@ public class ReminderActivity extends AppCompatActivity {
             return;
         } else {
             String[] projection = new String[]{NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_NAME, NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TEXT};
-            String selection = " " + NotificationsContract.NotifEntry._ID + " == ?" ;
-            String[]selectionArgs = new String[]{notifUri.getLastPathSegment()};
+            String selection = " " + NotificationsContract.NotifEntry._ID + " == ?";
+            String[] selectionArgs = new String[]{notifUri.getLastPathSegment()};
             Cursor cursor = getContentResolver().query(notifUri, projection, selection, selectionArgs, null);
             String text = "";
             if (cursor != null && cursor.moveToFirst()) {
-                text = cursor.getString(cursor.getColumnIndex(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_NAME)) + "\n"+
+                text = cursor.getString(cursor.getColumnIndex(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_NAME)) + "\n" +
                         cursor.getString(cursor.getColumnIndex(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TEXT));
             } else {
                 Toast.makeText(getApplicationContext(), "Failed to set reminder. Try again later", Toast.LENGTH_SHORT);
@@ -152,11 +148,11 @@ public class ReminderActivity extends AppCompatActivity {
                 values1.put(CalendarContract.Reminders.MINUTES, 10);
                 Uri reminderSet = cr.insert(REMINDERS_URI, values1);
 
-                Toast.makeText(this,"Reminder Added Successfully",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Reminder Added Successfully", Toast.LENGTH_SHORT).show();
                 //Display reminder id
-                if(reminderSet != null){
-                    Toast.makeText(this, "Reminder added Successfully " , Toast.LENGTH_SHORT).show();
-                    Thread thread = new Thread(){
+                if (reminderSet != null) {
+                    Toast.makeText(this, "Reminder added Successfully ", Toast.LENGTH_SHORT).show();
+                    Thread thread = new Thread() {
                         @Override
                         public void run() {
                             try {

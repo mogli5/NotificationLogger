@@ -9,7 +9,7 @@ public class NotificationHandler {
 
     public static final String LOCK = "lock";
 
-    private Context context;
+    private final Context context;
 
     NotificationHandler(Context context) {
         this.context = context;
@@ -19,8 +19,8 @@ public class NotificationHandler {
 //        if(sbn.isOngoing()){
 //            return;
 //        }
-        NotificationObject no = new NotificationObject(sbn,context);
-        if(no.getText().length() == 0)
+        NotificationObject no = new NotificationObject(sbn, context);
+        if (no.getText().length() == 0)
             return;
         String appName = no.getAppName();
         String title = no.getTitle();
@@ -29,7 +29,7 @@ public class NotificationHandler {
         String date = utils.getDate(no.getSystemTime());
         String packageName = no.getPackageName();
         long timeInMillis = no.getSystemTime();
-        String []selectionArgs = new String[]{appName,text,title,time,date,packageName};
+        String[] selectionArgs = new String[]{appName, text, title, time, date, packageName};
         String selection = "name = ? AND text = ? AND title = ? AND time = ? AND date = ? AND packagename = ?";
         String[] projection = {
                 NotificationsContract.NotifEntry._ID,
@@ -39,19 +39,19 @@ public class NotificationHandler {
                 NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TITLE,
                 NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TEXT,
                 NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_PACKAGE_NAME};
-        Cursor cursor = context.getContentResolver().query(NotificationsContract.NotifEntry.CONTENT_URI,projection,selection,selectionArgs,null);
-        if(cursor != null && cursor.getCount() > 0)
+        Cursor cursor = context.getContentResolver().query(NotificationsContract.NotifEntry.CONTENT_URI, projection, selection, selectionArgs, null);
+        if (cursor != null && cursor.getCount() > 0)
             return;
-        synchronized (LOCK){
+        synchronized (LOCK) {
             ContentValues values = new ContentValues();
             values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_NAME, appName);
             values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TITLE, title);
             values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TEXT, text);
-            values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TIME,time);
-            values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_DATE,date);
-            values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_PACKAGE_NAME,packageName);
-            values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_TIME_IN_MILLI,timeInMillis);
-            context.getContentResolver().insert(NotificationsContract.NotifEntry.CONTENT_URI,values);
+            values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_TIME, time);
+            values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_DATE, date);
+            values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_DATA_PACKAGE_NAME, packageName);
+            values.put(NotificationsContract.NotifEntry.COLUMN_NOTIF_APP_TIME_IN_MILLI, timeInMillis);
+            context.getContentResolver().insert(NotificationsContract.NotifEntry.CONTENT_URI, values);
         }
     }
 }

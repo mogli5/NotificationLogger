@@ -1,28 +1,16 @@
 package com.mogli.notificationlog2;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.preference.PreferenceManager;
-
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.LoaderManager;
-import android.app.TimePickerDialog;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.ContentUris;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
-import android.content.Loader;
-
-import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -30,31 +18,27 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.Settings;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private static final int NOTIF_LOADER = 1;
     private NotifDbHelper notifDbHelper;
     private NotifCursorAdaptor notifCursorAdaptor;
-    private static final int NOTIF_LOADER = 1;
     private ListView listView;
 
     private boolean deleteNotifAfter30days;
@@ -71,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         doNotKillService();
 
-        listView = (ListView) findViewById(R.id.list_view_notif);
+        listView = findViewById(R.id.list_view_notif);
         notifCursorAdaptor = new NotifCursorAdaptor(this, null);
         notifDbHelper = new NotifDbHelper(this);
 
@@ -87,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String click = "clicked :" + id;
 //                Log.v("MainActivity","itemClicked" + id);
-                TextView text = (TextView) findViewById(R.id.app_text);
+                TextView text = findViewById(R.id.app_text);
                 if (text.getMaxLines() == 3)
                     text.setMaxLines(50);
                 else
@@ -101,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private void checkCalendarPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_CALENDAR,Manifest.permission.WRITE_CALENDAR},5);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR}, 5);
         }
     }
 
@@ -109,13 +93,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 //        Log.v("main", "notifprefer");
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String deleteAfter = preferences.getString("deletenotifafter",getResources().getString(R.string.pref_value_one_week));
+        String deleteAfter = preferences.getString("deletenotifafter", getResources().getString(R.string.pref_value_one_week));
         int deleteAfterInt = Integer.parseInt(deleteAfter);
         doDeleteNotifOlderThanXdays(deleteAfterInt);
 //        Log.v("main"," " + deleteAfter);
         preferences.registerOnSharedPreferenceChangeListener(this);
     }
-
 
 
     private void doDeleteNotifOlderThanXdays(int deleteAfter) {

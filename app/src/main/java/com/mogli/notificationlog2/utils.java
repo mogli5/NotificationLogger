@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class utils {
     public static String getAppNameFromPackage(Context context, String packageName, boolean returnNull) {
@@ -47,14 +46,14 @@ public class utils {
         }
     }
 
-    public static String getTime(Long currentTimeMillis){
+    public static String getTime(Long currentTimeMillis) {
         DateFormat df = new SimpleDateFormat("HH:mm:ss");
         Date resultdate = new Date(currentTimeMillis);
         String currentTime = df.format(resultdate);
         return currentTime;
     }
 
-    public static String getDate(Long currentTimeMillis){
+    public static String getDate(Long currentTimeMillis) {
         DateFormat df = new SimpleDateFormat("d MMM yyyy");
         Date resultdate = new Date(currentTimeMillis);
         String currentDate = df.format(resultdate);
